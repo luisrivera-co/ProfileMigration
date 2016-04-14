@@ -221,6 +221,11 @@ script AppDelegate
     end try
     log "savedState cleared"
 
+    --archive the user's keychain folder to avoid keychain errors on login
+    try
+        do shell script "mv /Users/" & netLoginID & "/Library/Keychains /Users/" & netLoginID & "/Library/Keychains.old" with administrator privileges
+    end try
+    log "old keychains archived"
 
     --rename Homedir and chown permissions
     log "running DSCL routine now to remove old local account"
